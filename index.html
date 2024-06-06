@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Eye</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+    margin: 20;
+}
+
+.robot-eye-container {
+    display: flex;
+    gap: 100px;
+}
+
+.robot-eye {
+    width: 200px;
+    height:200px;
+    background-color: #00ffff;
+    border-radius: 10%;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    }
+    to {
+        box-shadow: 0 0 40px rgba(0, 255, 255, 1);
+    }
+}
+
+</style>
+<body>
+    <div class="robot-eye-container">
+        <div class="robot-eye"></div>
+        <div class="robot-eye"></div>
+    </div>
+    <script src="script.js"></script>
+    <button href=second.html>tap</button>
+</body>
+
+</html>
+<script>
+// This script is optional and can be used to add interactivity or further animations.
+document.addEventListener('DOMContentLoaded', () => {
+    const eyes = document.querySelectorAll('.robot-eye');
+
+    // Example: Make the eyes follow the mouse cursor
+    document.addEventListener('mousemove', (e) => {
+        eyes.forEach(eye => {
+            const rect = eye.getBoundingClientRect();
+            const eyeX = rect.left + rect.width / 2;
+            const eyeY = rect.top + rect.height / 2;
+            const angle = Math.atan2(e.pageX - eyeX, e.pageY - eyeY);
+            const x = Math.sin(angle) * 5;
+            const y = Math.cos(angle) * 5;
+
+            eye.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    });
+});
+
+</script>
